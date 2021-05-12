@@ -10,27 +10,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <!-- First Nav -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><h1>Hangman</h1></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" >
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-target="#exampleModal" data-toggle="modal">Login/Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <!-- Second Nav -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -41,7 +20,7 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Top Scores</a>
+          <a class="nav-link" href="/leaderboard">Top Scores</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,7 +37,7 @@
   </nav>
   <body class='container'>
     <div class="row">
-    <div class="col-8">
+    <div class="col-8 ">
         {% if request.session.status == 'win' %}
             <h1 class="text-center text-success">You Win</h1>
         {% elif request.session.status == 'lose' %}
@@ -82,7 +61,7 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <div class="justify-content-center mt-3">
+        <div class= "mt-3">
             <h2 class="text-center">Guess a Letter</h2>
             <form action="/letter" method="POST" id="form">
                 {% csrf_token %}
@@ -106,70 +85,6 @@
         {% endif %}
     </div>
 </div>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-            <div class="login-form">
-                <h1>Customer Login</h1>
-             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#login">Login</a></li>
-                <li><a data-toggle="tab" href="#register">Register</a></li>
-             </ul>
-             <div class="tab-content">
-                <div id="login" class="tab-pane fade in active">
-                   {% if messages %}
-                   <ul>
-                         {% for message in messages %}
-                            <li>
-                               {{ message }}
-                            </li>
-                         {% endfor %}
-                   </ul>
-                   {% endif %} 
-                   <form action="/user/login/" method="POST">
-                      {% csrf_token %}
-                      <div class="form-group">
-                         <label>Username/Email</label>
-                         <input type="text" name="usernameEmail" class="form-control">
-                      </div>
-                      <div class="form-group">
-                         <label>Password</label>
-                         <input type="password" name="password" class="form-control">
-                      </div>
-                      <button type="submit" class="btn btn-black">Login</button>
-                   </form>
-                </div>
-                
-                <div id="register" class="tab-pane fade">
-                   <form action="/user/register/" method="POST">
-                      {% csrf_token %}
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name="username" class="form-control">
-                    </div>
-                      <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email Address">
-                      </div>
-                      <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
-                      </div>
-                      <div class="form-group">
-                            <label>Confirm Password</label>
-                         <input type="password" name="confirmPassword" class="form-control" placeholder="Confirm Password">
-                      </div>
-                      <button type="submit" class="btn btn-black">Register</button>
-                   </form>
-                </div>
-             </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>    
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

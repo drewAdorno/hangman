@@ -22,11 +22,6 @@ def index(request):
 
     return render(request, 'app1/index.html', context)
 
-
-#ball
-#b
-# all  //keeping track of the remaining letters in place
-
 def letter(request):     
         #letter=letter.lower()
         letter=request.POST['letter'].lower()  #make letter lowercase
@@ -46,6 +41,7 @@ def letter(request):
             print(request.session['masked_word'])
         result_check(request)
         return redirect('/')
+
 def result_check(request):
     if request.session['word'] == request.session['masked_word']:
         request.session['status'] = 'win'
@@ -57,7 +53,11 @@ def result_check(request):
             else:
                 request.session['placeholder'][request.session['word'][i]]=''
         print(request.session['placeholder'])
+
 def newGame(request, difficulty):
     request.session.clear()
     request.session['difficulty']=difficulty
     return redirect('/')
+
+def leaderboard(request):
+    return render(request, 'leaderboard.html')
